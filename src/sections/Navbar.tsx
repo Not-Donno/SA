@@ -1,47 +1,48 @@
-import Image from "next/image";
+import Link from 'next/link';
 
-const navLinks = [
-    { label: "Home", href: "#" },
-    { label: "Features", href: "#features" },
-    { label: "Integrations", href: "#integrations" },
-    { label: "FAQs", href: "#faqs" },
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Contact', href: '/contact' },
 ];
 
-export default function Navbar() {
-    return(
-         <section className="py-4">
-        <div className="container">
-            <div className="grid grid-cols-2 border border-white/15 rounded-full p-2 px-4 items-center">
-                <div>
-                    <Image
-                      src="/logo.png"
-                      alt="Logo"
-                      width={24}
-                      height={24}
-                      />
+export default function Home() {
+  return (
+    <div>
+      <nav className="flex items-center justify-between px-6 py-4 bg-card border-b border-border">
+        <Link href="/" className="text-2xl font-bold">
+          MyBrand
+        </Link>
 
-                </div>
-                <div className="flex justify-end">
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    className="feather feather-menu md:hidden">
-                                <line x1="3" y1="12" x2="21" y2="12"></line>
-                                <line x1="3" y1="6" x2="21" y2="6"></line>
-                                <line x1="3" y1="18" x2="21" y2="18"></line>
-                                </svg>
-                                <button className="border-white h-12 rounded-full px-6 font-medium">Log In</button>
-                                <button>Sign Up</button>
-                </div>
-            </div>
-        </div> 
-    </section>
-    );
+        <div className="hidden md:flex gap-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-foreground font-medium hover:text-primary transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex gap-3">
+          <button className="px-4 py-2 border border-primary text-primary font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors">
+            Sign In
+          </button>
+          <button className="px-4 py-2 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity">
+            Get Started
+          </button>
+        </div>
+      </nav>
+
+      <main className="p-8">
+        <h1 className="text-3xl font-bold">Welcome</h1>
+        <p className="text-lg text-muted-foreground mt-2">
+          Hellooo?
+        </p>
+      </main>
+    </div>
+  );
 }
